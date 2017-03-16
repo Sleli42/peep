@@ -34,7 +34,7 @@ export const inMaker = (company) => {
 
 export const emitNoteEvent = name => ctx => {
   // Do we have to remove prop note ?
- 
+
   const { output: { note } } = ctx;
   if (note) {
     ctx.evtx.service('notes').emit(name, { ...ctx, message: { broadcastAll: true, replyTo: name }, output: note });
@@ -134,6 +134,7 @@ const init = (evtx) => {
       load: [formatOutput(outMakerMany)],
       loadOne: [formatOutput(outMaker)],
       add: [formatOutput(outMaker), emitEvent('company:added'), emitNoteEvent('note:added')],
+      del: [emitEvent('company:deleted')],
       update: [formatOutput(outMaker), emitEvent('company:updated')],
       setPreferred: [emitEvent('company:setPreferred')],
     });

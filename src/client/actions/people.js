@@ -6,6 +6,7 @@ export const ADD_PEOPLE = 'EvtX:Server:people:add';
 export const PEOPLE_ADDED = 'people:added';
 export const PEOPLE_UPDATED = 'people:updated';
 export const SET_PREFERRED_PEOPLE = 'EvtX:Server:people:setPreferred';
+export const CHECK_EMAIL = 'EvtX:Server:people:checkEmailUniqueness';
 export const TOGGLE_PREFERRED_FILTER = 'toggle:preferred:people';
 export const FILTER_PEOPLE_LIST = 'filter:people:list';
 
@@ -27,8 +28,30 @@ export const addPeople = people => (dispatch) => {
   });
 };
 
+<<<<<<< HEAD
+=======
+export const checkEmail = email => (dispatch) => {
+  if (!email) return Promise.reject(new Error('Email cannot be null'));
+  const promise = new Promise((resolve, reject) => {
+    const callback = (err, res) => {
+      if (err) return reject(err);
+      if (!res.ok) return reject(new Error('Email is not uniq'));
+      return resolve(res.email);
+    };
+    const action = {
+      type: CHECK_EMAIL,
+      callback,
+      payload: email,
+    };
+    dispatch(action);
+  });
+  return promise;
+};
+
+>>>>>>> 211bb49049578ba75b1c5d16d6d9dc71f7bd3f5a
 export const onPreferredClick = person => (dispatch) => {
   const { _id, preferred } = person;
+  console.log('_id: ', _id);
   dispatch({
     type: SET_PREFERRED_PEOPLE,
     replyTo: PEOPLE_UPDATED,

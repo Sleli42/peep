@@ -1,8 +1,6 @@
 import colors, { randomColor } from '../utils/colors';
 import { cleanInputString } from '../utils/inputs';
 
-// const validator = new Schema(fields.email);
-
 const fields = {
   prefix: {
     key: 'prefix',
