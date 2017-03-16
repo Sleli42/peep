@@ -69,7 +69,7 @@ const fields = {
       {
         type: 'email',
         pattern: /^(([^<>()[]\\.,;:s@"]+(\.[^<>()[]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        message: 'E-maill not valide (Input in lowercase please)',
+        message: 'E-mail not valide (Input in lowercase please)',
       },
       { required: true, message: 'E-mail adress is required' },
     ],
