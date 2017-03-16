@@ -8,21 +8,23 @@ export const Circle = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${props => props.color};
-  width: 36px;
+  min-width: 36px;
+  max-width: 36px;
   height: 36px;
   color: #FFF;
   text-transform: uppercase;
+  font-size: 1rem;
   font-weight: bold;
-  font-size: 1.2em;
   border-radius: 50%;
+  overflow: hidden;
   cursor: pointer;
 `;
 
-const initials = R.compose(R.join(''), R.map(R.take(1)), R.split(' '));
+const initials = R.compose(R.join(''), R.map(R.take(1)), R.take(3), R.split(' '));
 
-const Avatar = ({ name, color, showTooltip = false }) => (
+const Avatar = ({ name, color, showTooltip = false, style = {} }) => (
   <Tooltip title={showTooltip ? name : ''}>
-    <Circle color={color}>
+    <Circle color={color} style={style}>
       { initials(name) }
     </Circle>
   </Tooltip>
@@ -32,6 +34,7 @@ Avatar.propTypes = {
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   showTooltip: PropTypes.bool,
+  style: PropTypes.object,
 };
 
 export default Avatar;

@@ -7,7 +7,8 @@ import { socketIoMiddleWare } from '../middlewares';
 const configureStore = initialState => createStore(
   rootReducer,
   initialState,
-  applyMiddleware(socketIoMiddleWare(io), thunk, createLogger()),
+  applyMiddleware(thunk, createLogger()),
+  // applyMiddleware(socketIoMiddleWare(io), thunk, createLogger()),
 );
 
 export default configureStore;

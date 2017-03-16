@@ -1,12 +1,20 @@
 import React from 'react';
 import chai from 'chai'; // eslint-disable-line
 import { shallow } from 'enzyme'; // eslint-disable-line
+<<<<<<< HEAD
 import { Companies } from '../';
 import { List, WrapperElt, WrapperNavElt, TitleElt } from '../List';
 import { Preview, ContainerElt, ContainerLeftElt, PreferredElt, NameElt, TagContainerElt, ContainerRightElt, IconStyleElt } from '../Company';
 import Avatar from '../../Avatar';
 // import { companies } from '../../App';
 // import { loadCompanies } from '../../../actions/companies';
+=======
+import { Row, Col } from 'antd';
+import { Companies } from '../';
+import { List, WrapperElt, WrapperNavElt, TitleElt } from '../list';
+import { Preview, ContainerElt, ContainerLeftElt, PreferredElt, NameElt, TagContainerElt, ContainerRightElt, IconStyleElt } from '../Preview';
+import Avatar from '../../Avatar';
+>>>>>>> 8ef54d62051025f327de964e173074dd5e393cbf
 
 const { describe, it } = global;
 const { expect } = chai;
@@ -14,7 +22,11 @@ const companies = [];
 const loadCompanies = () => {};
 
 
+<<<<<<< HEAD
 describe('[UT] <CompaniesBoard />', () => {
+=======
+describe('[UT] <Companies />', () => {
+>>>>>>> 8ef54d62051025f327de964e173074dd5e393cbf
   const path = <Companies companies={companies} loadCompanies={loadCompanies} />;
   it('Should render a <List />', () => {
     expect(shallow(path).find(List)).to.have.length(1);
@@ -30,6 +42,13 @@ describe('[UT] <List />', () => {
     expect(shallow(path).find(WrapperNavElt)).to.have.length(1);
   });
   it('\t<WrapperNavElt /> should contain a <TitleElt />', () => expect(<TitleElt />).to.exist);
+<<<<<<< HEAD
+=======
+  it('Should render a <Row />', () => {
+    expect(shallow(path).find(Row)).to.have.length(1);
+  });
+  it('\t<Row /> should contain a <Col />', () => expect(<Col />).to.exist);
+>>>>>>> 8ef54d62051025f327de964e173074dd5e393cbf
 });
 
 const company = { name: 'HIGHTEAM', tags: [], avatar: { color: 'black' } };

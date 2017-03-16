@@ -31,18 +31,21 @@ const data = {
   }
 };
 
-describe('Services checks', function() {
-  it('[Tags::load]', (done) => {
+describe('Tags services', function() {
+  it('should load', (done) => {
     const personStub = sinon.stub(Person, 'findAll', () => Promise.resolve(data.collections.people));
     const companyStub = sinon.stub(Company, 'findAll', () => Promise.resolve(data.collections.companies));
+    const end = (...params) => {
+      personStub.restore();
+      companyStub.restore();
+      done(...params);
+    }
     tags.load()
       .then( tags => {
-        personStub.restore();
-        companyStub.restore();
         should(tags).eql([['A', 2], ['B', 4], ['C', 1]]);
-        done();
+        end();
     })
-    .catch(done);
+    .catch(end);
   });
 
 });

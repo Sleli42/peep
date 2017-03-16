@@ -1,7 +1,7 @@
 import React from 'react';
 import chai from 'chai'; // eslint-disable-line
 import { shallow } from 'enzyme'; // eslint-disable-line
-import App, { Content, MainWrapper } from '..';
+import { App, Content, MainWrapper } from '..';
 import Navbar from '../../Navbar/';
 
 const { describe, it } = global;
@@ -22,4 +22,8 @@ describe('<App />', () => {
     expect(shallow(<App />)
       .find(MainWrapper)).to.have.lengthOf(1);
   });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8ef54d62051025f327de964e173074dd5e393cbf
 });

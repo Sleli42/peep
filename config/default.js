@@ -4,9 +4,8 @@ module.exports = {
   locale: 'en_US',
   publicPath: path.join(__dirname, '../public'),
   buildPath: path.join(__dirname, '../build'),
-  server: {
-   host: '0.0.0.0',
-   port: 3004,
+  sessionDuration: 8,
+  google: {
+    clientId: '1013003508849-ke0dsjttftqcl0ee3jl7nv7av9iuij8p.apps.googleusercontent.com',
   },
-
 };
