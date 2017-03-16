@@ -28,8 +28,6 @@ export const addPeople = people => (dispatch) => {
   });
 };
 
-<<<<<<< HEAD
-=======
 export const checkEmail = email => (dispatch) => {
   if (!email) return Promise.reject(new Error('Email cannot be null'));
   const promise = new Promise((resolve, reject) => {
@@ -48,10 +46,8 @@ export const checkEmail = email => (dispatch) => {
   return promise;
 };
 
->>>>>>> 211bb49049578ba75b1c5d16d6d9dc71f7bd3f5a
 export const onPreferredClick = person => (dispatch) => {
   const { _id, preferred } = person;
-  console.log('_id: ', _id);
   dispatch({
     type: SET_PREFERRED_PEOPLE,
     replyTo: PEOPLE_UPDATED,

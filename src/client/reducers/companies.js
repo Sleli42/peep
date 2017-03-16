@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import {
-  COMPANIES_LOADED,
-} from '../actions/companies';
-
-const companies = (state = [], action) => {
-  const { payload } = action;
-  switch (action.type) {
-    case COMPANIES_LOADED:
-      return payload;
-    default: return state;
-=======
 import R from 'ramda';
 import moment from 'moment';
 import {
@@ -69,7 +57,6 @@ const companies = (state = initialState, action) => {
       };
     default:
       return state;
->>>>>>> 8ef54d62051025f327de964e173074dd5e393cbf
   }
 };
 

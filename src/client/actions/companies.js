@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-export const LOAD_COMPANIES = 'EVTX:SERVER:COMPANIES:LOAD';
-export const COMPANIES_LOADED = 'COMPANIES:LOADED';
-
-export const loadCompanies = () => (dispatch, getState) => {
-  const { companies } = getState();
-  console.log('getState: ', getState());
-  if (!companies.length) {
-=======
 import R from 'ramda';
 
 export const LOAD_COMPANIES = 'EvtX:Server:companies:load';
@@ -22,15 +13,12 @@ export const SORT_COMPANY_LIST = 'sort:company:list';
 export const loadCompanies = () => (dispatch, getState) => {
   const { companies } = getState();
   if (R.isEmpty(companies.data)) {
->>>>>>> 8ef54d62051025f327de964e173074dd5e393cbf
     dispatch({
       type: LOAD_COMPANIES,
       replyTo: COMPANIES_LOADED,
     });
   }
 };
-<<<<<<< HEAD
-=======
 
 export const addCompany = company => (dispatch) => {
   dispatch({
@@ -62,4 +50,3 @@ export const sortCompanyList = sortBy => ({
 });
 
 export default { loadCompanies, addCompany };
->>>>>>> 8ef54d62051025f327de964e173074dd5e393cbf
