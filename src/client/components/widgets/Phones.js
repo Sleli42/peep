@@ -15,9 +15,7 @@ const IconDelete = styled(Icon)`
 let id = 0;
 
 class AddPhones extends Component {
-  state = {
-
-  };
+  state = {};
 
   add = () => {
     const { form: { setFieldsValue, getFieldValue } } = this.props;
@@ -48,7 +46,7 @@ class AddPhones extends Component {
   }
 
   render() {
-    const { form: { getFieldDecorator, getFieldValue } } = this.props;
+    const { form: { getFieldDecorator, getFieldValue }, mode } = this.props;
     const { phoneLabel, phoneNumber } = this.state;
     getFieldDecorator(fields.phones.key, fields.phones);
     const phones = getFieldValue(fields.phones.key);
@@ -64,6 +62,7 @@ class AddPhones extends Component {
                       { required: true },
                       { type: 'enum', enum: ['mobile', 'home', 'work'], message: 'label required' },
                     ],
+                    initialValue: phone.label,
                   })(
                     <Select onChange={this.handlePhoneLabel} style={{ width: '70px' }} placeholder="Select ..." >
                       { R.map(({ key, value }) =>
@@ -85,8 +84,8 @@ class AddPhones extends Component {
                       { min: 10, max: 15, message: '[min: 10 | max: 15] numbers' },
                       { type: 'string', pattern: /^[0-9]+$/, message: 'Only numbers' },
                     ],
-                    initialValue: '',
                     validateTrigger: 'onChange',
+                    initialValue: phone.number,
                   })(
                     <Input
                       placeholder="phone number"

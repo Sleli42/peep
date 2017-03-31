@@ -31,22 +31,36 @@ const Color = styled.div`
 const filterValues = R.compose(R.fromPairs, R.filter(v => !R.match(/[-0-9]/, v[0]).length), R.toPairs);
 const getPhones = R.compose(R.fromPairs, R.filter(v => R.match('phone', v[0]).length), R.toPairs);
 
- const getLabel = (list, id) => {
-   const found = R.compose(R.filter(v => R.match(`phones-label-${id}`, v[0]).length), R.toPairs)(list);
-   return found[0][1];
- }
+const getLabel = (list, id) => {
+ const found = R.compose(R.filter(v => R.match(`phones-label-${id}`, v[0]).length), R.toPairs)(list);
+ return found[0][1];
+}
 
- const getNumber = (list, id) => {
-   const found = R.compose(R.filter(v => R.match(`phones-number-${id}`, v[0]).length), R.toPairs)(list);
-   return found[0][1];
- }
+const getNumber = (list, id) => {
+ const found = R.compose(R.filter(v => R.match(`phones-number-${id}`, v[0]).length), R.toPairs)(list);
+ return found[0][1];
+}
 
-const setFieldsPhones = phonesList => {
+const setPhoneField = phonesList => {
   const phones = phonesList.phones;
   return R.map(e => {
-    e = { id: e.id, label: getLabel(phonesList, e.id), number: getNumber(phonesList, e.id) };
-    return e;
+    console.log('e.id: ', e.id);
+    return { id: e.id, label: getLabel(phonesList, e.id), number: getNumber(phonesList, e.id) };
+  })(phones);
+}
+
+const setMissingPhonesFields = person => {
+  const { phones } = person;
+  let id = -1;
+  const phonesFields = R.map(phone => {
+    id++;
+    return {
+      [`phones-label-${id}`]: phone.label,
+      [`phones-number-${id}`]: phone.number
+    }
   })(phones)
+  const newPerson = R.map(t => ({ ...person, ...t }))(phonesFields)
+  return R.merge(newPerson[0], newPerson[1]);
 }
 
 class AddAndEditPeople extends Component {
@@ -66,7 +80,7 @@ class AddAndEditPeople extends Component {
     if (this.isEditMode === true) {
       const { match: { params: { id } }, people, form: { setFieldsValue } } = this.props;
       const person = people[id];
-      const initialValues = { ...person  };
+      const initialValues = { ...person };
       setFieldsValue(initialValues);
       this.setState({ color: initialValues.color, name: initialValues.name });
     } else {
@@ -94,10 +108,10 @@ class AddAndEditPeople extends Component {
     e.preventDefault();
 
     validateFieldsAndScroll((err, values) => {
-      values.phones = setFieldsPhones(getPhones(values));
+      values = { ...values, phones: setPhoneField(getPhones(values)) };
       if (!err && !this.state.emailAlreadyExist) {
         const { prefix, color, preferred, firstName, lastName, email, roles,
-          type, jobType, company, note, jobDescription, phones, tags } = sanitize(filterValues(values), fields);
+          type, jobType, company, note, jobDescription, phones, tags } = filterValues(values);
         const newPeople = {
           prefix,
           avatar: { color },
@@ -240,7 +254,7 @@ class AddAndEditPeople extends Component {
                   </Select>) }
             </FormItem>
           </Col>
-          <AddEmail {...this.props} />
+          <AddEmail {...this.props} mode={this.isEditMode} email={(person) ? person.email : null} />
           <Col sm={4}>
             <FormItem label={fields.jobType.label}>
               { getFieldDecorator(fields.jobType.key, fields.jobType)(
@@ -267,7 +281,7 @@ class AddAndEditPeople extends Component {
             </FormItem>
           </Col>
         </Row>
-        <AddPhones {...this.props} />
+        <AddPhones {...this.props} mode={this.isEditMode} />
         <Row gutter={24}>
           <Col sm={12}>
             <FormItem label={fields.tags.label}>

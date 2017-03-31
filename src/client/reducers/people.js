@@ -11,8 +11,16 @@ import {
   } from '../actions/people';
 
 const make = (person) => {
-  const { firstName, lastName } = person;
-  const updatedPerson = { ...person, name: `${firstName} ${lastName}`, typeName: 'person', createdAt: moment(person.createdAt) };
+  const { firstName, lastName, phones = [] } = person;
+  let id = 0;
+  const newPhones = R.map(phone => ({ ...phone, id: id++ }))(phones)
+  const updatedPerson = {
+    ...person,
+    name: `${firstName} ${lastName}`,
+    phones: newPhones,
+    typeName: 'person',
+    createdAt: moment(person.createdAt)
+  };
   if (person.updatedAt) updatedPerson.updatedAt = moment(person.updatedAt);
   return updatedPerson;
 };

@@ -7,7 +7,8 @@ const FormItem = Form.Item;
 
 class AddEmail extends Component {
   handleCheckEmailValidator = (rule, value, cb) => {
-    const { checkEmail } = this.props;
+    const { checkEmail, mode, email } = this.props;
+    if (mode && email === value) cb();
     if (value && value.length) {
       checkEmail(value)
         .then(email => {
